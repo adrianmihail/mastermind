@@ -267,7 +267,7 @@ def codebreaker_Guess
 
     # show cb colors after selection
     print_Cb_Positions
-
+    system('clear')
   end
 end
 
@@ -277,28 +277,72 @@ puts 'Match = color is in that position'
 puts 'Present = color is somewhere in that interval'
 puts 'Unasigned = color is not present at all'
 
+# verify what colors match
+def verify_Colors_Match
+  $cb_Positions[0] = if $cb_Positions[0] == $cm_Positions[0]
+                       "Match = #{$cm_Positions[0]}"
+                     elsif $cm_Positions.include?($cb_Positions[0]) &&
+                           $cb_Positions[0] != $cm_Positions[0]
+                       "Present = #{$cb_Positions[0]}"
+                     else
+                       "Unasigned = #{$cb_Positions[0]}"
+                     end
+
+  $cb_Positions[1] = if $cb_Positions[1] == $cm_Positions[1]
+                       "Match = #{$cm_Positions[1]}"
+                     elsif $cm_Positions.include?($cb_Positions[1]) &&
+                           $cb_Positions[1] != $cm_Positions[1]
+                       "Present = #{$cb_Positions[1]}"
+                     else
+                       "Unasigned = #{$cb_Positions[1]}"
+                     end
+
+  $cb_Positions[2] = if $cb_Positions[2] == $cm_Positions[2]
+                       "Match = #{$cm_Positions[2]}"
+                     elsif $cm_Positions.include?($cb_Positions[2]) &&
+                           $cb_Positions[2] != $cm_Positions[2]
+                       "Present = #{$cb_Positions[2]}"
+                     else
+                       "Unasigned = #{$cb_Positions[2]}"
+                     end
+
+  $cb_Positions[3] = if $cb_Positions[3] == $cm_Positions[3]
+                       "Match = #{$cm_Positions[3]}"
+                     elsif $cm_Positions.include?($cb_Positions[3]) &&
+                           $cb_Positions[3] != $cm_Positions[3]
+                       "Present = #{$cb_Positions[3]}"
+                     else
+                       "Unasigned = #{$cb_Positions[3]}"
+                     end
+end
 # turns counter
 turn_Counter = 10
 
 # codebreaker inputs colors until it matches codemaker's selection
-until $codebreaker_Wins == 1 || $codemaker_Wins == 1 || $draw == 1
+until $codebreaker_Wins == 1 || $codemaker_Wins == 1 || $draw == 1 || turn_Counter == 0
 
   # get input from codebreaker
   codebreaker_Guess
 
-  # verify what colors match
-  if $cb_Positions[0] == $cm_Positions[0]
-    $cb_Positions[0] = "Match = #{$cm_Positions[0]}"
-  elsif $cm_Positions.include?($cd_Positions[0]) &&
-        $cd_Positions[0] != $cm_Positions[0]
-    $cb_Positions[0] = 'Present'
-  else
-    $cb_Positions[0] == 'Unasigned'
-  end
+  # verify if the input from cb matches cm's colors
+  verify_Colors_Match
 
   # show cb colors after match
   print_Cb_Positions
 
+  # cb wins if guesses all colors positions until the turns end
+  if $cb_Positions.all? { |guess| guess.include?('Match') }
+    puts "Codebreaker broke the code! It's a win for him!"
+    $codebreaker_Wins = 1
+  end
+
   # subtract  the turns until 0 so the game can end
+  # cm wins if the cb does not guess until the turns end
   turn_Counter -= 1
+  if turn_Counter == 0
+    puts 'Turns ended, Codemaker wins!'
+  else
+    puts "Codebreaker has #{turn_Counter} turns to guess!"
+  end
+
 end
