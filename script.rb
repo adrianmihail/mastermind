@@ -159,7 +159,7 @@ def codemaker_Human
   system('clear')
 end
 
-# ask for positions from the Human codemaker
+# ask for positions from the CPU codemaker
 def codemaker_CPU
   colors_List = %w[Blue Red Green Yellow White Black]
   $cm_Positions[0] = colors_List.sample
@@ -170,7 +170,7 @@ def codemaker_CPU
 end
 
 # ask user if he codemaker is CPU or Human
-puts 'Choose if you want to play against Human (cmhuman) or against CPU (cmcpu)'
+puts 'Choose if the Codemaker is Human (cmhuman) or CPU (cmcpu)'
 choose_Codemaker = gets.chomp
 case choose_Codemaker
 when 'cmhuman'
@@ -181,17 +181,8 @@ else
   'Wrong Input! Please choose cmhuman or cmcpu'
 end
 
-# codemaker win asignment
-$codemaker_Wins = 0
-
-# codebreaker win asignment
-$codebreaker_Wins = 0
-
-# draw asignment
-$draw = 0
-
 # codebreaker asigns the colors and plays until all green or until turn time is up
-def codebreaker_Guess
+def codebreaker_Human
   # cb asignment
   $cb_asignment = 0
 
@@ -291,6 +282,57 @@ def codebreaker_Guess
   end
 end
 
+
+# ask for random positions from the CPU codebreaker
+def codebreaker_CPU_Initialization
+  colors_List = %w[Blue Red Green Yellow White Black]
+  $cb_Positions[0] = colors_List.sample
+  $cb_Positions[1] = colors_List.sample
+  $cb_Positions[2] = colors_List.sample
+  $cb_Positions[3] = colors_List.sample
+  print_Cb_Positions
+end
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# CPU guesses based on matching
+def codebreaker_CPU_Guess
+  colors_List = %w[Blue Red Green Yellow White Black]
+  print colors_List
+
+  if $cb_Positions[0].include?('Unasigned')
+    if colors_List.any? {|color| $cb_Positions[0].include?(color)}
+    delete_Index = colors_List.index(color)
+    print delete_Index
+      print colors_List
+    end
+  end
+
+
+end
+
+# ask user if he codebreaker is CPU or Human
+puts 'Choose if the Codebreaker is Human (cbhuman) or CPU (cbcpu)'
+choose_Codebreaker = gets.chomp
+case choose_Codebreaker
+when 'cbhuman'
+  'Codebreaker is Human!'
+when 'cbcpu'
+  codebreaker_CPU_Initialization
+else
+  'Wrong Input! Please choose cbhuman or cbcpu'
+end
+
+
+# codemaker win asignment
+$codemaker_Wins = 0
+
+# codebreaker win asignment
+$codebreaker_Wins = 0
+
+# draw asignment
+$draw = 0
+
+
 # codebreaker instructions
 puts 'Codebreaker, asign each position a color ex. p1red, p2blue'
 puts 'Match = color is in that position'
@@ -342,7 +384,12 @@ turn_Counter = 10
 until $codebreaker_Wins == 1 || $codemaker_Wins == 1 || $draw == 1 || turn_Counter == 0
 
   # get input from codebreaker
-  codebreaker_Guess
+  case choose_Codebreaker
+  when 'cbhuman'
+    codebreaker_Human
+  when 'cbcpu'
+    codebreaker_CPU_Guess
+  end
 
   # verify if the input from cb matches cm's colors
   verify_Colors_Match
