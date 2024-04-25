@@ -45,10 +45,10 @@ class Color
 end
 
 # create instances of colors per position for the codemaker
-cm_p1 = Color.new(cm_p1)
-cm_p2 = Color.new(cm_p2)
-cm_p3 = Color.new(cm_p3)
-cm_p4 = Color.new(cm_p4)
+$cm_p1 = Color.new($cm_p1)
+$cm_p2 = Color.new($cm_p2)
+$cm_p3 = Color.new($cm_p3)
+$cm_p4 = Color.new($cm_p4)
 
 # create instances of colors per position for the codebreaker
 $cb_p1 = Color.new($cb_p1)
@@ -59,106 +59,127 @@ $cb_p4 = Color.new($cb_p4)
 # check if codemaker asigned the positions colors
 $cm_asignment = 0
 
-print_Cm_Positions
+# ask for positions from the Human codemaker
+def codemaker_Human
+  until $cm_asignment == 1
 
-# ask for positions from the codemaker
-until $cm_asignment == 1
+    # asign user input
+    puts 'Codemaker, asign colors per positions (p1red)'
+    cm_input = gets.chomp
 
-  # asign user input
-  puts 'Codemaker, asign colors per positions (p1red)'
-  cm_input = gets.chomp
+    # modify color based on input
+    case cm_input
+    when 'p1red'
+      $cm_Positions[0] = $cm_p1.red
+      puts 'Position 1 is now Red!'
+    when 'p1blue'
+      $cm_Positions[0] = $cm_p1.blue
+      puts 'Position 1 is now Blue!'
+    when 'p1yellow'
+      $cm_Positions[0] = $cm_p1.yellow
+      puts 'Position 1 is now Yellow!'
+    when 'p1green'
+      $cm_Positions[0] = $cm_p1.green
+      puts 'Position 1 is now Green!'
+    when 'p1black'
+      $cm_Positions[0] = $cm_p1.black
+      puts 'Position 1 is now Black!'
+    when 'p1white'
+      $cm_Positions[0] = $cm_p1.white
+      puts 'Position 1 is now White!'
 
-  # modify color based on input
-  case cm_input
-  when 'p1red'
-    $cm_Positions[0] = cm_p1.red
-    puts 'Position 1 is now Red!'
-  when 'p1blue'
-    $cm_Positions[0] = cm_p1.blue
-    puts 'Position 1 is now Blue!'
-  when 'p1yellow'
-    $cm_Positions[0] = cm_p1.yellow
-    puts 'Position 1 is now Yellow!'
-  when 'p1green'
-    $cm_Positions[0] = cm_p1.green
-    puts 'Position 1 is now Green!'
-  when 'p1black'
-    $cm_Positions[0] = cm_p1.black
-    puts 'Position 1 is now Black!'
-  when 'p1white'
-    $cm_Positions[0] = cm_p1.white
-    puts 'Position 1 is now White!'
+    when 'p2red'
+      $cm_Positions[1] = $cm_p2.red
+      puts 'Position 2 is now Red!'
+    when 'p2blue'
+      $cm_Positions[1] = $cm_p2.blue
+      puts 'Position 2 is now Blue!'
+    when 'p2yellow'
+      $cm_Positions[1] = $cm_p2.yellow
+      puts 'Position 2 is now Yellow!'
+    when 'p2green'
+      $cm_Positions[1] = $cm_p2.green
+      puts 'Position 2 is now Green!'
+    when 'p2black'
+      $cm_Positions[1] = $cm_p2.black
+      puts 'Position 2 is now Black!'
+    when 'p2white'
+      $cm_Positions[1] = $cm_p2.white
+      puts 'Position 2 is now White!'
 
-  when 'p2red'
-    $cm_Positions[1] = cm_p2.red
-    puts 'Position 2 is now Red!'
-  when 'p2blue'
-    $cm_Positions[1] = cm_p2.blue
-    puts 'Position 2 is now Blue!'
-  when 'p2yellow'
-    $cm_Positions[1] = cm_p2.yellow
-    puts 'Position 2 is now Yellow!'
-  when 'p2green'
-    $cm_Positions[1] = cm_p2.green
-    puts 'Position 2 is now Green!'
-  when 'p2black'
-    $cm_Positions[1] = cm_p2.black
-    puts 'Position 2 is now Black!'
-  when 'p2white'
-    $cm_Positions[1] = cm_p2.white
-    puts 'Position 2 is now White!'
+    when 'p3red'
+      $cm_Positions[2] = $cm_p3.red
+      puts 'Position 3 is now Red!'
+    when 'p3blue'
+      $cm_Positions[2] = $cm_p3.blue
+      puts 'Position 3 is now Blue!'
+    when 'p3yellow'
+      $cm_Positions[2] = $cm_p3.yellow
+      puts 'Position 3 is now Yellow!'
+    when 'p3green'
+      $cm_Positions[2] = $cm_p3.green
+      puts 'Position 3 is now Green!'
+    when 'p3black'
+      $cm_Positions[2] = $cm_p3.black
+      puts 'Position 3 is now Black!'
+    when 'p3white'
+      $cm_Positions[2] = $cm_p3.white
+      puts 'Position 3 is now White!'
 
-  when 'p3red'
-    $cm_Positions[2] = cm_p3.red
-    puts 'Position 3 is now Red!'
-  when 'p3blue'
-    $cm_Positions[2] = cm_p3.blue
-    puts 'Position 3 is now Blue!'
-  when 'p3yellow'
-    $cm_Positions[2] = cm_p3.yellow
-    puts 'Position 3 is now Yellow!'
-  when 'p3green'
-    $cm_Positions[2] = cm_p3.green
-    puts 'Position 3 is now Green!'
-  when 'p3black'
-    $cm_Positions[2] = cm_p3.black
-    puts 'Position 3 is now Black!'
-  when 'p3white'
-    $cm_Positions[2] = cm_p3.white
-    puts 'Position 3 is now White!'
+    when 'p4red'
+      $cm_Positions[3] = $cm_p4.red
+      puts 'Position 4 is now Red!'
+    when 'p4blue'
+      $cm_Positions[3] = $cm_p4.blue
+      puts 'Position 4 is now Blue!'
+    when 'p4yellow'
+      $cm_Positions[3] = $cm_p4.yellow
+      puts 'Position 4 is now Yellow!'
+    when 'p4green'
+      $cm_Positions[3] = $cm_p4.green
+      puts 'Position 4 is now Green!'
+    when 'p4black'
+      $cm_Positions[3] = $cm_p4.black
+      puts 'Position 4 is now Black!'
+    when 'p4white'
+      $cm_Positions[3] = $cm_p4.white
+      puts 'Position 4 is now White!'
 
-  when 'p4red'
-    $cm_Positions[3] = cm_p4.red
-    puts 'Position 4 is now Red!'
-  when 'p4blue'
-    $cm_Positions[3] = cm_p4.blue
-    puts 'Position 4 is now Blue!'
-  when 'p4yellow'
-    $cm_Positions[3] = cm_p4.yellow
-    puts 'Position 4 is now Yellow!'
-  when 'p4green'
-    $cm_Positions[3] = cm_p4.green
-    puts 'Position 4 is now Green!'
-  when 'p4black'
-    $cm_Positions[3] = cm_p4.black
-    puts 'Position 4 is now Black!'
-  when 'p4white'
-    $cm_Positions[3] = cm_p4.white
-    puts 'Position 4 is now White!'
+    when 'done'
+      puts 'Codemaker positions are set!'
+      break
+    else
+      puts 'Invalid Input! Please use p$number$color or done when you selected all colors'
+    end
 
-  when 'done'
-    puts 'Codemaker positions are set!'
-    break
-  else
-    puts 'Invalid Input! Please use p$number$color or done when you selected all colors'
+    # show cm colors
+    print_Cm_Positions
+
   end
-
-  # show cm colors
-  print_Cm_Positions
-
+  system('clear')
 end
 
-print_Cm_Positions
+# ask for positions from the Human codemaker
+def codemaker_CPU
+  colors_List = %w[Blue Red Green Yellow White Black]
+  $cm_Positions[0] = colors_List.sample
+  $cm_Positions[1] = colors_List.sample
+  $cm_Positions[2] = colors_List.sample
+  $cm_Positions[3] = colors_List.sample
+  print_Cm_Positions
+end
+
+# ask user if he codemaker is CPU or Human
+puts 'Choose if you want to play against Human (cmhuman) or against CPU (cmcpu)'
+choose_Codemaker = gets.chomp
+case choose_Codemaker
+when 'cmhuman'
+  codemaker_Human
+when 'cmcpu'
+  codemaker_CPU
+else
+  'Wrong Input! Please choose cmhuman or cmcpu'
+end
 
 # codemaker win asignment
 $codemaker_Wins = 0
@@ -267,7 +288,6 @@ def codebreaker_Guess
 
     # show cb colors after selection
     print_Cb_Positions
-    system('clear')
   end
 end
 
