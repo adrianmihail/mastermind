@@ -293,20 +293,61 @@ def codebreaker_CPU_Initialization
   print_Cb_Positions
 end
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # CPU guesses based on matching
 def codebreaker_CPU_Guess
   colors_List = %w[Blue Red Green Yellow White Black]
-  print colors_List
 
-  if $cb_Positions[0].include?('Unasigned')
-    if colors_List.any? {|color| $cb_Positions[0].include?(color)}
-    delete_Index = colors_List.index(color)
-    print delete_Index
-      print colors_List
+  if $cb_Positions[0].include?('Match')
+    $cb_Positions[0] = $cb_Positions[0]
+    if $cb_Positions[0].include?('Unasigned')
+      $cb_Positions[0] = $cb_Positions[0][12,-1]
     end
+  elsif $cb_Positions[0].include?('Unasigned')
+    color_to_remove = $cb_Positions[0].split('=', 2)
+    colors_List.delete(color_to_remove)
+    $cb_Positions[0] = colors_List.sample
+  elsif $cb_Positions[0].include?('Present')
+    $cb_Positions[0] = colors_List.sample
   end
 
+  if $cb_Positions[1].include?('Match')
+    $cb_Positions[1] = $cb_Positions[1]
+    if $cb_Positions[1].include?('Unasigned')
+      $cb_Positions[1] = $cb_Positions[1][12..-1]
+    end
+  elsif $cb_Positions[1].include?('Unasigned')
+    color_to_remove = $cb_Positions[1].split('=', 2)
+    colors_List.delete(color_to_remove)
+    $cb_Positions[1] = colors_List.sample
+  elsif $cb_Positions[1].include?('Present')
+    $cb_Positions[1] = colors_List.sample
+  end
+
+  if $cb_Positions[2].include?('Match')
+    $cb_Positions[2] = $cb_Positions[2]
+    if $cb_Positions[2].include?('Unasigned')
+      $cb_Positions[2] = $cb_Positions[2][12..-1]
+    end
+  elsif $cb_Positions[2].include?('Unasigned')
+    color_to_remove = $cb_Positions[2].split('=', 2)
+    colors_List.delete(color_to_remove)
+    $cb_Positions[2] = colors_List.sample
+  elsif $cb_Positions[2].include?('Present')
+    $cb_Positions[2] = colors_List.sample
+  end
+
+  if $cb_Positions[3].include?('Match')
+    $cb_Positions[3] = $cb_Positions[3]
+    if $cb_Positions[3].include?('Unasigned')
+      $cb_Positions[3] = $cb_Positions[3][12..-1]
+    end
+  elsif $cb_Positions[3].include?('Unasigned')
+    color_to_remove = $cb_Positions[3].split('=', 2)
+    colors_List.delete(color_to_remove)
+    $cb_Positions[3] = colors_List.sample
+  elsif $cb_Positions[3].include?('Present')
+    $cb_Positions[3] = colors_List.sample
+  end
 
 end
 
@@ -332,12 +373,6 @@ $codebreaker_Wins = 0
 # draw asignment
 $draw = 0
 
-
-# codebreaker instructions
-puts 'Codebreaker, asign each position a color ex. p1red, p2blue'
-puts 'Match = color is in that position'
-puts 'Present = color is somewhere in that interval'
-puts 'Unasigned = color is not present at all'
 
 # verify what colors match
 def verify_Colors_Match
@@ -386,6 +421,10 @@ until $codebreaker_Wins == 1 || $codemaker_Wins == 1 || $draw == 1 || turn_Count
   # get input from codebreaker
   case choose_Codebreaker
   when 'cbhuman'
+    puts 'Codebreaker, asign each position a color ex. p1red, p2blue'
+    puts 'Match = color is in that position'
+    puts 'Present = color is somewhere in that interval'
+    puts 'Unasigned = color is not present at all'
     codebreaker_Human
   when 'cbcpu'
     codebreaker_CPU_Guess
